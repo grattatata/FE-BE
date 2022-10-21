@@ -18,7 +18,13 @@ function Login() {
         </ButtonWrap>
       </InputWrap>
       <SocialKakao>
-        <img src={kakaoLogin} alt="kakaoLogin" width="90%" height="55px" style={{ marginLeft: "20px" }} />
+        <img
+          src={kakaoLogin}
+          alt="kakaoLogin"
+          width="90%"
+          height="55px"
+          style={{ marginLeft: "20px" }}
+        />
       </SocialKakao>
     </LoginForm>
   );
@@ -82,7 +88,7 @@ const Button = styled.button`
   border-radius: 10px;
   border: none;
   :hover {
-    background-color: #00ffbf;
+    background-color: #14ebb5c5;
     color: #ffffff;
     border: none;
     cursor: pointer;

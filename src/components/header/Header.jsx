@@ -6,14 +6,20 @@ function Header({ title }) {
   return (
     <>
       <InfoWrap>
-        <Link to="/" style={{ textDecoration: "none", color: "#00ffbf" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "#14ebb5c5" }}>
           <div>My Blog</div>
         </Link>
         <LoginWrap>
-          <Link to="/login" style={{ textDecoration: "none", color: "#00ffbf" }}>
+          <Link
+            to="/login"
+            style={{ textDecoration: "none", color: "#14ebb5c5" }}
+          >
             <div>로그인</div>
           </Link>
-          <Link to="/register" style={{ textDecoration: "none", color: "#00ffbf" }}>
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "#14ebb5c5" }}
+          >
             <div style={{ marginLeft: "15px" }}>회원가입</div>
           </Link>
         </LoginWrap>
@@ -33,7 +39,7 @@ const InfoWrap = styled.div`
   margin-left: 20px;
   margin-bottom: -10px;
   font-weight: bold;
-  color: #00ffbf;
+  color: #14ebb5c5;
 `;
 
 const LoginWrap = styled.nav`
@@ -47,7 +53,7 @@ const LoginWrap = styled.nav`
 const Banner = styled.div`
   height: 180px;
   position: relative;
-  background-color: #00ffbf;
+  background-image: linear-gradient(to right, #74ebd5, #acb6e5);
 `;
 
 const Ment = styled.div`
@@ -56,7 +62,7 @@ const Ment = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
-  color: #e0f8ec;
+  color: #ffffff;
 `;
