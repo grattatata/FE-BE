@@ -1,13 +1,54 @@
 import React from "react";
 import styled from "styled-components";
+import {useDispatch} from "react-redux"
+import {useNavigate} from "react-router-dom"
+import { postUser } from "../../redux/modules/signup";
+import {useForm} from "react-hook-form"
 function Register() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {register, handleSubmit, formState:{errors}} = useForm();
+  console.log(errors)
+
+  const onSubmit = (data) => {
+    console.log(data)
+      dispatch(postUser(data)).then(response => { 
+        if(response.payload.loginSuccess){ 
+          window.alert("회원가입 성공!")
+          navigate("/login")
+        }
+        else{
+          window.alert("회원가입 실패!")
+        }
+      }) 
+    }
+
   return (
-    <RegisterForm>
+    <RegisterForm onSubmit={handleSubmit(onSubmit)}>
       <InputWrap>
         <Title>회원가입</Title>
-        <IdInput placeholder="아이디를 입력하세요" type="text" />
-        <NameInput placeholder="닉네임을 입력하세요" type="text" />
-        <PassWordInput placeholder="비밀번호를 입력하세요" type="password" />
+        <IdInput 
+          placeholder="아이디를 입력하세요" 
+          name="ID"
+          {...register('ID', {required:true})}
+         />
+        <NameInput 
+          placeholder="닉네임을 입력하세요"
+          name="nickname"
+          {...register('nickname', {required:true} )}
+          />
+        <PassWordInput 
+          placeholder="비밀번호를 입력하세요" 
+          type="password"
+          name="password"
+          {...register('password', {required:true})}
+         />
+        <PwCheckInput 
+          placeholder="비밀번호 확인" 
+          type="password"
+          name="confirm"
+          {...register('confirm', {required:true})}
+         />
         <Button>가입하기</Button>
       </InputWrap>
     </RegisterForm>
@@ -63,6 +104,17 @@ const PassWordInput = styled.input`
   border: none;
   border-radius: 10px;
 `;
+
+const PwCheckInput = styled.input`
+  width: 350px;
+  height: 40px;
+  padding: 5px;
+  margin-top: 20px;
+  margin-left: 18px;
+
+  border: none;
+  border-radius: 10px;
+`
 
 const Button = styled.button`
   width: 100px;

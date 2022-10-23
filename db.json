@@ -1,0 +1,10 @@
+{
+    "users":[
+        {
+            "ID": "ahn970",
+            "nickname": "치영",
+            "password": "1234",
+            "confirm": "1234"
+        }
+    ]
+}

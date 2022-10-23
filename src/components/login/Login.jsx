@@ -47,7 +47,7 @@ const IdInput = styled.input`
   padding: 5px;
   margin-top: 20px;
   margin-left: 18px;
-
+  
   border: none;
   border-radius: 10px;
 `;
