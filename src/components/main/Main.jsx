@@ -6,6 +6,7 @@ function Main() {
   const { feeds } = useSelector((state) => state.feeds);
   return (
     <StFeeds>
+      <div></div>
       {feeds.map((feed) => (
         <StFeed key={feed.id}>{feed.title}</StFeed>
       ))}

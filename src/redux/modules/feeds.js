@@ -15,6 +15,12 @@ const initialState = {
       title: "메인 피드 2",
     },
   ],
+  feed: {
+    id: "0",
+    title: "",
+    body: "",
+    isDone: false,
+  },
 };
 
 const feeds = (state = initialState, action) => {

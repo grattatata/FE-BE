@@ -1,15 +1,61 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import kakaoLogin from "../../assets/img/kakao_login_large_wide.png";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function Login() {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    axios
+      .post("http:/222.111.114.132:4000/users/login", data)
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("token", response.data.token);
+          alert("로그인 완료");
+          navigate("/");
+        } else alert("아이디가 존재하지 않습니다.");
+      })
+      .catch((error) => {
+        const type = error.response.data;
+        switch (type) {
+          case "DONE_LOGIN":
+            alert("이미 로그인 되어있습니다.");
+            break;
+          case "BAD_VALIDATION":
+            alert("ID나 PW가 틀렸습니다.");
+            break;
+          default:
+        }
+      });
+  };
+
   return (
-    <LoginForm>
+    <LoginForm onSubmit={handleSubmit(onSubmit)}>
       <InputWrap>
         <Title>My Blog</Title>
-        <IdInput placeholder="아이디를 입력하세요" type="text" />
-        <PassWordInput placeholder="비밀번호를 입력하세요" type="password" />
+        <IdInput
+          placeholder="아이디를 입력하세요"
+          {...register("userId", {
+            required: "아이디를 입력해주세요.",
+          })}
+        />
+        <p style={{ color: "red", marginLeft: "23px", fontSize: "12px", marginBottom: "-5px" }}>{errors.userId?.message}</p>
+        <PassWordInput
+          placeholder="비밀번호를 입력하세요"
+          type="password"
+          {...register("password", {
+            required: "비밀번호를 입력해주세요.",
+          })}
+        />
+        <p style={{ color: "red", marginLeft: "23px", fontSize: "12px", marginBottom: "-5px" }}>{errors.password?.message}</p>
         <ButtonWrap>
           <Button>로그인</Button>
           <Link to={"/register"}>
