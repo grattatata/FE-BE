@@ -1,54 +1,89 @@
 import React from "react";
 import styled from "styled-components";
-import {useDispatch} from "react-redux"
-import {useNavigate} from "react-router-dom"
-import { postUser } from "../../redux/modules/signup";
-import {useForm} from "react-hook-form"
+// import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+// import { postUser } from "../../redux/modules/signup";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 function Register() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {register, handleSubmit, formState:{errors}} = useForm();
-  console.log(errors)
-
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const password = watch("password");
   const onSubmit = (data) => {
-    console.log(data)
-      dispatch(postUser(data)).then(response => { 
-        if(response.payload.loginSuccess){ 
-          window.alert("회원가입 성공!")
-          navigate("/login")
-        }
-        else{
-          window.alert("회원가입 실패!")
-        }
-      }) 
-    }
+    axios.post("http://222.111.114.132:4000/users/signup", data).then((response) => {
+      console.log(response);
+      if (response.request.status === 201) {
+        window.alert("회원가입 성공!");
+        navigate("/login");
+      } else {
+        alert("중복된 아이디 입니다.");
+      }
+    });
+  };
 
   return (
     <RegisterForm onSubmit={handleSubmit(onSubmit)}>
       <InputWrap>
         <Title>회원가입</Title>
-        <IdInput 
-          placeholder="아이디를 입력하세요" 
-          name="ID"
-          {...register('ID', {required:true})}
-         />
-        <NameInput 
+        <IdInput
+          placeholder="아이디를 입력하세요"
+          {...register("userId", {
+            required: "아이디를 입력해주세요.",
+            maxLength: {
+              value: 10,
+              message: "10자 이내로 입력해주세요",
+            },
+            minLength: {
+              value: 4,
+              message: "4자 이상 입력해주세요.",
+            },
+          })}
+        />
+        <p style={{ color: "red", marginLeft: "23px", fontSize: "12px", marginBottom: "-5px" }}>{errors.userId?.message}</p>
+        <NameInput
           placeholder="닉네임을 입력하세요"
-          name="nickname"
-          {...register('nickname', {required:true} )}
-          />
-        <PassWordInput 
-          placeholder="비밀번호를 입력하세요" 
+          {...register("nickname", {
+            required: "닉네임을 입력해주세요.",
+            maxLength: {
+              value: 8,
+              message: "8자 이내로 입력해주세요.",
+            },
+            minLength: {
+              value: 4,
+              message: "4자 이상 입력해주세요.",
+            },
+          })}
+        />
+        <p style={{ color: "red", marginLeft: "23px", fontSize: "12px", marginBottom: "-5px" }}>{errors.nickname?.message}</p>
+        <PassWordInput
+          placeholder="비밀번호를 입력하세요"
           type="password"
-          name="password"
-          {...register('password', {required:true})}
-         />
-        <PwCheckInput 
-          placeholder="비밀번호 확인" 
+          {...register("password", {
+            required: "비밀번호는 필수 입력입니다.",
+            minLength: {
+              value: 6,
+              message: "비밀번호는 6자 이상 입력해주세요",
+            },
+          })}
+        />
+        <p style={{ color: "red", marginLeft: "23px", fontSize: "12px", marginBottom: "-5px" }}>{errors.password?.message}</p>
+        <PwCheckInput
+          placeholder="비밀번호 확인"
           type="password"
-          name="confirm"
-          {...register('confirm', {required:true})}
-         />
+          {...register("confirm", {
+            required: "반드시 입력해주세요.",
+            validate: {
+              check: (confirm) => confirm === password || "비밀번호가 일치하지 않습니다.",
+            },
+          })}
+        />
+        <p style={{ color: "red", marginLeft: "23px", fontSize: "12px", marginBottom: "-5px" }}>{errors.confirm?.message}</p>
         <Button>가입하기</Button>
       </InputWrap>
     </RegisterForm>
@@ -114,7 +149,7 @@ const PwCheckInput = styled.input`
 
   border: none;
   border-radius: 10px;
-`
+`;
 
 const Button = styled.button`
   width: 100px;
