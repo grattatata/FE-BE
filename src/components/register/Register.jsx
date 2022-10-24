@@ -17,9 +17,9 @@ function Register() {
   const password = watch("password");
   const onSubmit = (data) => {
     axios.post("http://222.111.114.132:4000/users/signup", data).then((response) => {
-      console.log(response);
-      if (response.request.status === 201) {
-        window.alert("회원가입 성공!");
+      // console.log(response);
+      if (response.status === 201) {
+        window.alert(response.data.msg);
         navigate("/login");
       } else {
         alert("중복된 아이디 입니다.");
