@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/header/Header";
 import Layout from "../components/layout/Layout";
-// import Main from "../components/Main/Main";
+import Main from "../components/main/Main";
 import MainInput from "../components/main/MainInput";
 // import styled from "styled-components";
 
@@ -10,7 +10,7 @@ function Home() {
     <Layout>
       <Header title={"우리들의 블로그"} />
       <MainInput />
-      {/* <Main /> */}
+      <Main />
       {/* 개인피드들 */}
 
       {/* <div>

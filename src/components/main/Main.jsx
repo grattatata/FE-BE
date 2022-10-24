@@ -1,16 +1,33 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 function Main() {
-  const { feeds } = useSelector((state) => state.feeds);
+  const dispatch = useDispatch();
+  const feeds = useSelector((state) => state.feeds.feeds);
+
   return (
-    <StFeeds>
-      <div></div>
-      {feeds.map((feed) => (
-        <StFeed key={feed.id}>{feed.title}</StFeed>
-      ))}
-    </StFeeds>
+    <div>
+      {/* {feeds.map((feed) => {
+        <div key={feed.id}>
+          <div>
+            <div>{feed.content}</div>
+          </div>
+        </div>;
+      })} */}
+      <div>
+        제일 큰 박스
+        <div>
+          위쪽 칸<p>이미지</p>
+          <p>닉네임</p>
+          <p>날짜</p>
+        </div>
+        <div>
+          게시글 칸<p>게시글</p>
+          <p>게시글 이미지</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
