@@ -14,27 +14,13 @@ function Login() {
   } = useForm();
 
   const onSubmit = (data) => {
-    axios
-      .post("http:/222.111.114.132:4000/users/login", data)
-      .then((response) => {
-        if (response.data.token) {
-          localStorage.setItem("token", response.data.token);
-          alert("로그인 완료");
-          navigate("/");
-        } else alert("아이디가 존재하지 않습니다.");
-      })
-      .catch((error) => {
-        const type = error.response.data;
-        switch (type) {
-          case "DONE_LOGIN":
-            alert("이미 로그인 되어있습니다.");
-            break;
-          case "BAD_VALIDATION":
-            alert("ID나 PW가 틀렸습니다.");
-            break;
-          default:
-        }
-      });
+    axios.post("http://222.111.114.132:4000/users/login", data).then((response) => {
+      console.log(response);
+      if (response.status === 200) {
+        alert(response.data.msg);
+        navigate("/");
+      }
+    });
   };
 
   return (
