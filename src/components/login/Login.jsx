@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import kakaoLogin from "../../assets/img/kakao_login_large_wide.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { REST_API_KEY, REDIRECT_URI } from "../../kakaologindata/KaKaoLoginData";
 
 function Login() {
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
   const navigate = useNavigate();
   const {
     register,
@@ -15,12 +17,15 @@ function Login() {
 
   const onSubmit = (data) => {
     axios.post("http://222.111.114.132:4000/users/login", data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         alert(response.data.msg);
         navigate("/");
       }
     });
+  };
+
+  const handleKaKaoLogin = () => {
+    window.location.href = KAKAO_AUTH_URL;
   };
 
   return (
@@ -49,7 +54,7 @@ function Login() {
           </Link>
         </ButtonWrap>
       </InputWrap>
-      <SocialKakao>
+      <SocialKakao onClick={handleKaKaoLogin}>
         <img src={kakaoLogin} alt="kakaoLogin" width="90%" height="55px" style={{ marginLeft: "20px" }} />
       </SocialKakao>
     </LoginForm>
