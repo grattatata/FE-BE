@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { __deleteFeeds, __getFeeds } from "../../redux/modules/feeds";
+import {
+  __deleteFeeds,
+  // __editFeeds,
+  __getFeeds,
+} from "../../redux/modules/feeds";
 import CommentList from "../comment/CommentList";
+import EditButton from "./EditButton";
 
 function Main() {
   const dispatch = useDispatch();
@@ -12,12 +17,16 @@ function Main() {
   const onDelete = (id) => () => {
     dispatch(__deleteFeeds(id)); //id값에 payload가 들어와서 함수로 박힘
   };
-
   // const a = (x) => {
   //   return (() =>{
   //     console.log(x)
   //   })
   // }
+
+  // const onEdit = (event) => {
+  //   event.preventDefault(event);
+  //   dispatch(__editFeeds({ id: feeds.id }));
+  // };
 
   useEffect(() => {
     dispatch(__getFeeds());
@@ -39,9 +48,10 @@ function Main() {
                       {new Date(feed.id).toDateString()}
                     </span>
                   </MainTopBox>
-                  {feed.content}
+                  <ContentBox>{feed.content}</ContentBox>
                   <ContentButton>
                     <button>수정</button>
+                    {/* <EditButton /> */}
                     <button onClick={onDelete(feed.id)}>삭제</button>
                   </ContentButton>
                   <CommentList />
@@ -83,8 +93,15 @@ const MainContent = styled.div`
   width: inherit;
 `;
 
-const MainFeedContainer = styled.div`
+const ContentBox = styled.div`
   height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MainFeedContainer = styled.div`
+  /* height: 200px; */
 
   margin-top: 20px;
   box-shadow: 2px 3px 5px 0px #acb6e5;
