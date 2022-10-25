@@ -1,12 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { __getFeeds } from "../../redux/modules/feeds";
+import { __deleteFeeds, __getFeeds } from "../../redux/modules/feeds";
 import CommentList from "../comment/CommentList";
 
 function Main() {
   const dispatch = useDispatch();
   const { feeds } = useSelector((state) => state.feeds);
+  // console.log(feeds);
+
+  const onDelete = (id) => () => {
+    dispatch(__deleteFeeds(id)); //id값에 payload가 들어와서 함수로 박힘
+  };
+
+  // const a = (x) => {
+  //   return (() =>{
+  //     console.log(x)
+  //   })
+  // }
 
   useEffect(() => {
     dispatch(__getFeeds());
@@ -29,6 +40,10 @@ function Main() {
                     </span>
                   </MainTopBox>
                   {feed.content}
+                  <ContentButton>
+                    <button>수정</button>
+                    <button onClick={onDelete(feed.id)}>삭제</button>
+                  </ContentButton>
                   <CommentList />
                 </MainFeedContainer>
               </div>
@@ -73,4 +88,8 @@ const MainFeedContainer = styled.div`
 
   margin-top: 20px;
   box-shadow: 2px 3px 5px 0px #acb6e5;
+`;
+
+const ContentButton = styled.div`
+  float: right;
 `;

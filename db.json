@@ -9,16 +9,6 @@
   ],
   "feeds": [
     {
-      "id": 1,
-      "content": "게시글입니다.1",
-      "isDone": false
-    },
-    {
-      "id": 2,
-      "content": "게시글입니다2",
-      "isDone": false
-    },
-    {
       "content": "추가",
       "isDone": false,
       "id": 1666688211245
