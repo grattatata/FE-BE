@@ -1,50 +1,76 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { __getFeeds } from "../../redux/modules/feeds";
+import CommentList from "../comment/CommentList";
 
 function Main() {
   const dispatch = useDispatch();
-  const feeds = useSelector((state) => state.feeds.feeds);
+  const { feeds } = useSelector((state) => state.feeds);
+
+  useEffect(() => {
+    dispatch(__getFeeds());
+  }, [dispatch]);
+  console.log(feeds);
 
   return (
     <div>
-      {/* {feeds.map((feed) => {
-        <div key={feed.id}>
-          <div>
-            <div>{feed.content}</div>
-          </div>
-        </div>;
-      })} */}
-      <div>
-        제일 큰 박스
-        <div>
-          위쪽 칸<p>이미지</p>
-          <p>닉네임</p>
-          <p>날짜</p>
-        </div>
-        <div>
-          게시글 칸<p>게시글</p>
-          <p>게시글 이미지</p>
-        </div>
-      </div>
+      <MainContBox>
+        <MainContainer>
+          <MainContent>
+            {feeds.map((feed) => (
+              <div key={feed.id}>
+                <MainFeedContainer>
+                  <MainTopBox>
+                    {/* <span>프로필</span> */}
+                    <span>{feed.id}</span>
+                    <span style={{ float: "right" }}>
+                      {new Date(feed.id).toDateString()}
+                    </span>
+                  </MainTopBox>
+                  {feed.content}
+                  <CommentList />
+                </MainFeedContainer>
+              </div>
+            ))}
+          </MainContent>
+        </MainContainer>
+      </MainContBox>
     </div>
   );
 }
 
 export default Main;
 
-const StFeeds = styled.div`
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-`;
-
-const StFeed = styled.div`
-  border: 1px solid #ddd;
-  width: 20%;
-  height: 100px;
+const MainContBox = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 24px;
-  border-radius: 12px;
+  justify-content: center;
+  margin-top: 40px;
+`;
+
+const MainContainer = styled.div`
+  /* border: 1px solid black; */
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MainTopBox = styled.div`
+  border-bottom: 1px solid #7588d8;
+  width: 100%;
+`;
+
+const MainContent = styled.div`
+  width: 70%;
+  width: inherit;
+`;
+
+const MainFeedContainer = styled.div`
+  height: 200px;
+
+  margin-top: 20px;
+  box-shadow: 2px 3px 5px 0px #acb6e5;
 `;

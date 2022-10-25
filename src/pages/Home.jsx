@@ -11,17 +11,6 @@ function Home() {
       <Header title={"우리들의 블로그"} />
       <MainInput />
       <Main />
-      {/* 개인피드들 */}
-
-      {/* <div>
-        <div>
-          <image>이미지</image>
-          <userName>닉네임</userName>
-          <div>22.10.24</div>
-        </div>
-        <hr /> */}
-      {/* hr필요 없긴함 */}
-      {/* </div> */}
     </Layout>
   );
 }

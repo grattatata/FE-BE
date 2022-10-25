@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addFeed } from "../../redux/modules/feeds";
+import { useDispatch } from "react-redux";
+import { __addFeeds } from "../../redux/modules/feeds";
 import styled from "styled-components";
 
 function MainInput() {
   const dispatch = useDispatch();
-  const [feed, setfeed] = useState({
-    id: 0,
+
+  const [feed, setFeed] = useState({
     content: "",
     isDone: false,
   });
-  const feeds = useSelector((state) => state.feeds.feeds);
+
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    setfeed({ ...feed, [name]: value });
+    setFeed({ ...feed, [name]: value });
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (feed === "") return;
+    if (feed.content === "") return;
 
-    dispatch(addFeed({ ...feed }));
-    setfeed({
-      id: 0,
+    dispatch(__addFeeds({ ...feed, id: Date.now() }));
+    setFeed({
       content: "",
       isDone: false,
     });
@@ -52,9 +51,8 @@ export default MainInput;
 const MainInputContainer = styled.div``;
 
 const MainInputBox = styled.div`
-  /* min-width: 640px; */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   border-bottom: 2px solid #71d2c0b5;

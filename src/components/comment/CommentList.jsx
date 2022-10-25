@@ -1,6 +1,6 @@
 import React from "react";
 function CommentList() {
-  <div></div>;
+  return <div>Comment</div>;
 }
 
 export default CommentList;
