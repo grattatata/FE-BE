@@ -44,7 +44,7 @@ export const __editFeeds = createAsyncThunk(
   async (payload, thunkApi) => {
     try {
       const { data } = await axios.patch(
-        `${SERVER_URL}/${payload.id}`,
+        `${SERVER_URL}/${payload.postId}`,
         payload
       );
       return thunkApi.fulfillWithValue(data);
@@ -112,7 +112,7 @@ export const feedsSlice = createSlice({
     [__editFeeds.fulfilled]: (state, action) => {
       state.isLoading = false;
       const idx = state.feeds.findIndex(
-        (feed) => feed.id === action.payload.id
+        (feed) => feed.postId === action.payload
       );
       state.feeds[idx] = action.payload;
     },

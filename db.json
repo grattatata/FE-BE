@@ -9,24 +9,14 @@
   ],
   "feeds": [
     {
-      "content": "ㅁㄴㅇㅁㄴㅇ",
-      "isDone": false,
-      "id": 1666692968528
-    },
-    {
-      "content": "asd",
-      "isDone": false,
-      "id": 1666697162156
-    },
-    {
-      "content": "추가 되는지 확인하기",
-      "isDone": false,
-      "id": 1666698249279
-    },
-    {
-      "content": "추가 되나요?",
-      "isDone": false,
-      "id": 1666708880403
+      "userKey": "",
+      "nickname": "",
+      "title": "1111",
+      "content": "asdasd",
+      "id": 1666799904789
     }
+  ],
+  "comments": [
+    {}
   ]
 }

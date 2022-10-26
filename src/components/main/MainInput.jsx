@@ -7,8 +7,14 @@ function MainInput() {
   const dispatch = useDispatch();
 
   const [feed, setFeed] = useState({
+    userKey: "", // 정확히 뭔지 물어보기
+    nickname: "",
+    title: "",
     content: "",
-    isDone: false,
+    // 아래 3개는 기본값일 수 도 있음 확인하기!
+    // postId: ,
+    //   createdAt: Date.now(),
+    //   updatedAt: Date.now(),
   });
 
   const onChangeHandler = (event) => {
@@ -22,8 +28,10 @@ function MainInput() {
 
     dispatch(__addFeeds({ ...feed, id: Date.now() }));
     setFeed({
+      userKey: "", // 정확히 뭔지 물어보기
+      nickname: "",
+      title: "",
       content: "",
-      isDone: false,
     });
   };
 
@@ -32,6 +40,13 @@ function MainInput() {
       {/* 전체적인 박스 */}
       <MainInputContainer>
         <MainInputBox>
+          <TitleInputText
+            placeholder="제목"
+            type="text"
+            name="title"
+            value={feed.title}
+            onChange={onChangeHandler}
+          />
           <MainInputText
             placeholder="지금 무슨 생각을 하고 계신가요?"
             type="text"
@@ -59,6 +74,17 @@ const MainInputBox = styled.div`
   padding: 30px;
 `;
 
+const TitleInputText = styled.input`
+  height: 30px;
+  margin-right: 30px;
+  border: 1px solid #6ed6c3b9;
+  text-align: center;
+  &:focus {
+    outline: 1px auto #acb6e5;
+    outline-offset: 2px;
+    border-color: transparent;
+  }
+`;
 const MainInputText = styled.input`
   min-width: 200px;
   width: 400px;
