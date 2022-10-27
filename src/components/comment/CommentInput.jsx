@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { __addComments } from "../../redux/modules/comments";
@@ -14,7 +14,7 @@ function CommentInput(id) {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (comment.content === "") return;
+    if (comment.comment === "") return;
 
     dispatch(__addComments({ ...comment, id: id }));
     setComment({
@@ -24,10 +24,10 @@ function CommentInput(id) {
     });
   };
   console.log(comment);
-  const onChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setComment((feed) => ({ ...feed, [name]: value }));
-  }, []);
+  // const onChange = useCallback((e) => {
+  //   const { name, value } = e.target;
+  //   setComment((comment) => ({ ...comment, [name]: value }));
+  // }, []);
 
   return (
     <form onSubmit={onSubmitHandler}>
@@ -38,7 +38,7 @@ function CommentInput(id) {
           type="text"
           name="comment"
           value={comment.comment}
-          onChange={onChange}
+          // onChange={onChange}
         ></CommentInputText>
         <CommentAddBtn>댓추</CommentAddBtn>
       </Commentbox>

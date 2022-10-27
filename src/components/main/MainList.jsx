@@ -12,7 +12,7 @@ import EditButton from "./EditButton";
 function MainList() {
   const dispatch = useDispatch();
   const { feeds } = useSelector((state) => state.feeds);
-  // console.log(feeds);
+  console.log(feeds);
 
   const onDelete = (id) => () => {
     dispatch(__deleteFeeds(id)); //id값에 payload가 들어와서 함수로 박힘

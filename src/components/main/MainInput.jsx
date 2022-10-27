@@ -25,9 +25,9 @@ function MainInput() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (feed.content || feed.title === "") return;
-
     dispatch(__addFeeds({ ...feed, id: Date.now() }));
     alert("오케이 레츠고");
+
     setFeed({
       userKey: "", // 정확히 뭔지 물어보기
       nickname: "",
