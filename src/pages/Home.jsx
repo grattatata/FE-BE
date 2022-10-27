@@ -1,9 +1,8 @@
 import React from "react";
 import Header from "../components/header/Header";
 import Layout from "../components/layout/Layout";
-import Main from "../components/main/Main";
 import MainInput from "../components/main/MainInput";
-// import styled from "styled-components";
+import Main from "../components/main/Main";
 
 function Home() {
   return (

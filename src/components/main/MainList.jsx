@@ -1,47 +1,40 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import {
-  __deleteFeeds,
-  // __editFeeds,
-  __getFeeds,
-} from "../../redux/modules/feeds";
+import { __deletePosts, __getPosts } from "../../redux/modules/posts";
 import CommentList from "../comment/CommentList";
 import EditButton from "./EditButton";
 
 function MainList() {
   const dispatch = useDispatch();
-  const { feeds } = useSelector((state) => state.feeds);
-  console.log(feeds);
+  const { posts } = useSelector((state) => state.posts);
+  console.log("posts", posts);
 
-  const onDelete = (id) => () => {
-    dispatch(__deleteFeeds(id)); //id값에 payload가 들어와서 함수로 박힘
+  const onDelete = (postId) => {
+    dispatch(__deletePosts(postId));
   };
 
   useEffect(() => {
-    dispatch(__getFeeds());
+    dispatch(__getPosts());
   }, [dispatch]);
 
-  console.log(feeds);
   return (
     <MainContent>
-      {feeds.map((feed) => (
-        <div key={feed.id}>
+      {posts?.map((post) => (
+        <div key={post.postId}>
           <MainFeedContainer>
             <MainTopBox>
-              <Contenttitle>{feed.title}</Contenttitle>
-              <span style={{ float: "right" }}>
-                {new Date(feed.id).toDateString()}
-              </span>
+              <Contenttitle>{post.title}</Contenttitle>
+              <span style={{ float: "right" }}>{post.createdAt.toDateString()}</span>
             </MainTopBox>
             <FeedsBox>
               <ContentButton>
                 {/* <button>수정</button> */}
-                <button onClick={onDelete(feed.id)}>삭제</button>
+                <button onClick={onDelete(post.postId)}>삭제</button>
               </ContentButton>
               <ContentBox>
-                {feed.content}
-                <EditButton />
+                {post.content}
+                <EditButton post={post} />
               </ContentBox>
             </FeedsBox>
             <CommentList />
@@ -63,8 +56,6 @@ const Contenttitle = styled.span`
 `;
 
 const MainFeedContainer = styled.div`
-  /* height: 200px; */
-
   margin-top: 20px;
   box-shadow: 2px 3px 5px 0px #acb6e5;
 `;

@@ -1,64 +1,42 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { __addFeeds } from "../../redux/modules/feeds";
+import { __addPosts } from "../../redux/modules/posts";
 import styled from "styled-components";
 
 function MainInput() {
   const dispatch = useDispatch();
 
-  const [feed, setFeed] = useState({
-    userKey: "", // 정확히 뭔지 물어보기
-    nickname: "",
+  const [posts, setPosts] = useState({
     title: "",
     content: "",
-    // 아래 3개는 기본값일 수 도 있음 확인하기!
-    // postId: ,
-    //   createdAt: Date.now(),
-    //   updatedAt: Date.now(),
   });
 
-  const onChangeHandler = (event) => {
-    const { name, value } = event.target;
-    setFeed({ ...feed, [name]: value });
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setPosts({ ...posts, [name]: value });
   };
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    if (feed.content || feed.title === "") return;
-    dispatch(__addFeeds({ ...feed, id: Date.now() }));
-    alert("오케이 레츠고");
-
-    setFeed({
-      userKey: "", // 정확히 뭔지 물어보기
-      nickname: "",
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (posts.title.trim() === "" || posts.content.trim() === "") return alert("내용을 입력해주세요!");
+    dispatch(__addPosts({ ...posts }));
+    alert("등록 완료");
+    setPosts({
       title: "",
       content: "",
     });
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      {/* 전체적인 박스 */}
+    <InputForm onSubmit={onSubmitHandler}>
       <MainInputContainer>
         <MainInputBox>
-          <TitleInputText
-            placeholder="제목"
-            type="text"
-            name="title"
-            value={feed.title}
-            onChange={onChangeHandler}
-          />
-          <MainInputText
-            placeholder="지금 무슨 생각을 하고 계신가요?"
-            type="text"
-            name="content"
-            value={feed.content}
-            onChange={onChangeHandler}
-          />
+          <TitleInputText placeholder="제목" type="text" name="title" value={posts.title} onChange={onChangeHandler} />
+          <MainInputText placeholder="지금 무슨 생각을 하고 계신가요?" type="text" name="content" value={posts.content} onChange={onChangeHandler} />
           <MainButton>추가하기</MainButton>
         </MainInputBox>
       </MainInputContainer>
-    </form>
+    </InputForm>
   );
 }
 
@@ -74,6 +52,8 @@ const MainInputBox = styled.div`
   border-bottom: 2px solid #71d2c0b5;
   padding: 30px;
 `;
+
+const InputForm = styled.form``;
 
 const TitleInputText = styled.input`
   height: 30px;

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import signup from "./modules/signup";
-import feeds from "./modules/feeds";
+import posts from "./modules/posts";
 
 const store = configureStore({
-  reducer: { feeds, signup },
+  reducer: { posts, signup },
 });
 
 export default store;

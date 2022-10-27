@@ -23,11 +23,6 @@ function CommentInput(id) {
       createdAt: "",
     });
   };
-  console.log(comment);
-  // const onChange = useCallback((e) => {
-  //   const { name, value } = e.target;
-  //   setComment((comment) => ({ ...comment, [name]: value }));
-  // }, []);
 
   return (
     <form onSubmit={onSubmitHandler}>
@@ -37,7 +32,7 @@ function CommentInput(id) {
           placeholder="댓글"
           type="text"
           name="comment"
-          value={comment.comment}
+          defaultvalue={comment.comment}
           // onChange={onChange}
         ></CommentInputText>
         <CommentAddBtn>댓추</CommentAddBtn>

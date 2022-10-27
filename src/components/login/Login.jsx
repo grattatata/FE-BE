@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import kakaoLogin from "../../assets/img/kakao_login_large_wide.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { decodeToken } from "react-jwt";
+import { useCookies } from "react-cookie";
 
 axios.defaults.withCredentials = true;
 
 function Login() {
   const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
+  const [cookies, setCookie] = useCookies(["accessToken", "refreshToken"]);
   const navigate = useNavigate();
   const {
     register,
@@ -20,13 +22,14 @@ function Login() {
   const onSubmit = (data) => {
     try {
       axios.post(process.env.REACT_APP_USER_LOGIN, data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           navigate("/");
-          const token = response.data.accessToken;
-          localStorage.setItem("token", token);
-          console.log(token);
-          const payload = decodeToken(token);
+          const accessToken = response.data.accessToken;
+          const refreshToken = response.data.refreshToken;
+          localStorage.setItem("token", accessToken);
+          setCookie("accessToken", accessToken);
+          setCookie("refreshToken", refreshToken);
+          const payload = decodeToken(accessToken);
           alert(`${payload.nickname} 님 환영합니다!`);
         } else if (response.status === 409) {
           alert(response.data.msg);
@@ -67,7 +70,7 @@ function Login() {
             <Button style={{ marginLeft: "20px" }}>회원가입</Button>
           </Link>
         </ButtonWrap>
-      </InputWrap>    
+      </InputWrap>
       <SocialKakao onClick={handleKaKaoLogin}>
         <img src={kakaoLogin} alt="kakaoLogin" width="90%" height="55px" style={{ marginLeft: "20px" }} />
       </SocialKakao>
