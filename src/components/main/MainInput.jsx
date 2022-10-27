@@ -24,9 +24,10 @@ function MainInput() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (feed.content === "") return;
+    if (feed.content || feed.title === "") return;
 
     dispatch(__addFeeds({ ...feed, id: Date.now() }));
+    alert("오케이 레츠고");
     setFeed({
       userKey: "", // 정확히 뭔지 물어보기
       nickname: "",
@@ -79,6 +80,8 @@ const TitleInputText = styled.input`
   margin-right: 30px;
   border: 1px solid #6ed6c3b9;
   text-align: center;
+  border-radius: 10px;
+
   &:focus {
     outline: 1px auto #acb6e5;
     outline-offset: 2px;
@@ -86,6 +89,8 @@ const TitleInputText = styled.input`
   }
 `;
 const MainInputText = styled.input`
+  border-radius: 10px;
+
   min-width: 200px;
   width: 400px;
   height: 30px;

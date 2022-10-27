@@ -11,12 +11,18 @@
     {
       "userKey": "",
       "nickname": "",
-      "title": "1111",
-      "content": "asdasd",
-      "id": 1666799904789
+      "title": "추우가",
+      "content": "추추추가",
+      "id": 1666819200906
     }
   ],
   "comments": [
-    {}
+    {},
+    {
+      "comment": "zzz",
+      "nickname": "",
+      "createdAt": "",
+      "id": {}
+    }
   ]
 }

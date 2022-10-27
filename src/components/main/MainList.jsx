@@ -18,12 +18,6 @@ function MainList() {
     dispatch(__deleteFeeds(id)); //id값에 payload가 들어와서 함수로 박힘
   };
 
-  // const a = (x) => {
-  //   return (() =>{
-  //     console.log(x)
-  //   })
-  // }
-
   useEffect(() => {
     dispatch(__getFeeds());
   }, [dispatch]);
@@ -47,7 +41,7 @@ function MainList() {
               </ContentButton>
               <ContentBox>
                 {feed.content}
-                <EditButton key={feed.id} content={feed.content} />
+                <EditButton />
               </ContentBox>
             </FeedsBox>
             <CommentList />
@@ -64,7 +58,7 @@ const MainTopBox = styled.div`
   width: 100%;
 `;
 
-const Contenttitle = styled.div`
+const Contenttitle = styled.span`
   margin: 10px;
 `;
 
