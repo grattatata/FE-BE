@@ -67,7 +67,7 @@ function Login() {
             <Button style={{ marginLeft: "20px" }}>회원가입</Button>
           </Link>
         </ButtonWrap>
-      </InputWrap>
+      </InputWrap>    
       <SocialKakao onClick={handleKaKaoLogin}>
         <img src={kakaoLogin} alt="kakaoLogin" width="90%" height="55px" style={{ marginLeft: "20px" }} />
       </SocialKakao>
@@ -133,7 +133,7 @@ const Button = styled.button`
   border-radius: 10px;
   border: none;
   :hover {
-    background-color: #00ffbf;
+    background-color: #14ebb5c5;
     color: #ffffff;
     border: none;
     cursor: pointer;
