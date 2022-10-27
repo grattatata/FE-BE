@@ -17,7 +17,7 @@ export const __addFeeds = createAsyncThunk(
 // 피드 받아오기
 export const __getFeeds = createAsyncThunk(
   "feeds/getFeeds",
-  async (_, thunkApi) => {
+  async (payload, thunkApi) => {
     try {
       const { data } = await axios.get(SERVER_URL);
       return thunkApi.fulfillWithValue(data);

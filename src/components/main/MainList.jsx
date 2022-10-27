@@ -7,16 +7,23 @@ import {
   __getFeeds,
 } from "../../redux/modules/feeds";
 import CommentList from "../comment/CommentList";
-import EditButton from "./EditButton";
+// import CommentList from "../comment/CommentList";
+// import EditButton from "./EditButton";
 
 function MainList() {
   const dispatch = useDispatch();
   const { feeds } = useSelector((state) => state.feeds);
-  console.log(feeds);
+  // console.log(feeds);
 
   const onDelete = (id) => () => {
     dispatch(__deleteFeeds(id)); //id값에 payload가 들어와서 함수로 박힘
   };
+
+  // const a = (x) => {
+  //   return (() =>{
+  //     console.log(x)
+  //   })
+  // }
 
   useEffect(() => {
     dispatch(__getFeeds());
@@ -29,7 +36,7 @@ function MainList() {
         <div key={feed.id}>
           <MainFeedContainer>
             <MainTopBox>
-              <Contenttitle>{feed.title}</Contenttitle>
+              <span> {feed.title}</span>
               <span style={{ float: "right" }}>
                 {new Date(feed.id).toDateString()}
               </span>
@@ -41,7 +48,7 @@ function MainList() {
               </ContentButton>
               <ContentBox>
                 {feed.content}
-                <EditButton />
+                {/* <EditButton key={feed.id} content={feed.content} /> */}
               </ContentBox>
             </FeedsBox>
             <CommentList />
@@ -58,13 +65,8 @@ const MainTopBox = styled.div`
   width: 100%;
 `;
 
-const Contenttitle = styled.span`
-  margin: 10px;
-`;
-
 const MainFeedContainer = styled.div`
   /* height: 200px; */
-
   margin-top: 20px;
   box-shadow: 2px 3px 5px 0px #acb6e5;
 `;

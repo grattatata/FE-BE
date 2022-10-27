@@ -24,7 +24,8 @@ function MainInput() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (feed.content || feed.title === "") return;
+    if (feed.content.trim() && feed.title.trim() === "") return;
+
     dispatch(__addFeeds({ ...feed, id: Date.now() }));
     alert("오케이 레츠고");
 
@@ -37,28 +38,29 @@ function MainInput() {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      {/* 전체적인 박스 */}
-      <MainInputContainer>
-        <MainInputBox>
-          <TitleInputText
-            placeholder="제목"
-            type="text"
-            name="title"
-            value={feed.title}
-            onChange={onChangeHandler}
-          />
-          <MainInputText
-            placeholder="지금 무슨 생각을 하고 계신가요?"
-            type="text"
-            name="content"
-            value={feed.content}
-            onChange={onChangeHandler}
-          />
-          <MainButton>추가하기</MainButton>
-        </MainInputBox>
-      </MainInputContainer>
-    </form>
+    <div>
+      <form onSubmit={onSubmitHandler}>
+        <MainInputContainer>
+          <MainInputBox>
+            <TitleInputText
+              placeholder="제목"
+              type="text"
+              name="title"
+              defaultValue={feed.title}
+              onChange={onChangeHandler}
+            />
+            <MainInputText
+              placeholder="지금 무슨 생각을 하고 계신가요?"
+              type="text"
+              name="content"
+              defaultValue={feed.content}
+              onChange={onChangeHandler}
+            />
+            <MainButton>추가하기</MainButton>
+          </MainInputBox>
+        </MainInputContainer>
+      </form>
+    </div>
   );
 }
 

@@ -34,7 +34,7 @@ function EditButton() {
     alert("수정완료! 😁");
   };
 
-  const onChange = useCallback((e) => {
+  const onChangeHandler = useCallback((e) => {
     const { name, value } = e.target;
     setInput((feed) => ({ ...feed, [name]: value }));
   }, []);
@@ -45,9 +45,9 @@ function EditButton() {
         ref={inputRef}
         type="text"
         name="content"
-        value={input.content}
+        defaultValue={input.content}
         disabled={disable}
-        onChange={onChange}
+        onChange={onChangeHandler}
       />
       {disable ? (
         <button onClick={onEdit}>수정</button>

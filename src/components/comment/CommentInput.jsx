@@ -37,7 +37,7 @@ function CommentInput(id) {
           placeholder="댓글"
           type="text"
           name="comment"
-          value={comment.comment}
+          defaultValue={comment.comment}
           // onChange={onChange}
         ></CommentInputText>
         <CommentAddBtn>댓추</CommentAddBtn>

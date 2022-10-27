@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getComments } from "../../redux/modules/comments";
 
@@ -10,14 +10,13 @@ function Comment({ id }) {
     dispatch(__getComments(id));
   }, [dispatch, id]);
 
-  console.log(comments);
   return (
     <div>
-      {comments?.map((comment) => (
+      {/* {comments?.map((comment) => (
         <div key={comment.id} comment={comment}>
           댓글1
         </div>
-      ))}
+      ))} */}
       {/* {comments
         ?.filter((comment) => {
           return comment.id == id;

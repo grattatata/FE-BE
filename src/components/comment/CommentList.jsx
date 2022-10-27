@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import Comment from "./Comment";
 import CommentInput from "./CommentInput";
 function CommentList() {
   return (
     <div>
       <CommentContainer>
         <CommentInput />
+        <Comment />
       </CommentContainer>
     </div>
   );
