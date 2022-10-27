@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const SERVER_URL = "http://localhost:3001/feeds";
+// const SERVER_URL = "http://localhost:3001/feeds";
+const SERVER_URL = "http://3.36.77.73:4000/posts";
 
 // 피드 추가하기
 export const __addFeeds = createAsyncThunk(

@@ -17,13 +17,13 @@ function Comment({ id }) {
           댓글1
         </div>
       ))} */}
-      {/* {comments
+      {comments
         ?.filter((comment) => {
           return comment.id == id;
         })
         .map((comment, i) => {
-          return <Comment key={i} comment={comment} />;
-        })} */}
+          return <div>{comment}</div>;
+        })}
     </div>
   );
 }

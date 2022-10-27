@@ -7,14 +7,8 @@ function MainInput() {
   const dispatch = useDispatch();
 
   const [feed, setFeed] = useState({
-    userKey: "", // 정확히 뭔지 물어보기
-    nickname: "",
     title: "",
     content: "",
-    // 아래 3개는 기본값일 수 도 있음 확인하기!
-    // postId: ,
-    //   createdAt: Date.now(),
-    //   updatedAt: Date.now(),
   });
 
   const onChangeHandler = (event) => {
@@ -30,8 +24,6 @@ function MainInput() {
     alert("오케이 레츠고");
 
     setFeed({
-      userKey: "", // 정확히 뭔지 물어보기
-      nickname: "",
       title: "",
       content: "",
     });

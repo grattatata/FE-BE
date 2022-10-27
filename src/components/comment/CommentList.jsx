@@ -7,7 +7,7 @@ function CommentList() {
     <div>
       <CommentContainer>
         <CommentInput />
-        <Comment />
+        {/* <Comment /> */}
       </CommentContainer>
     </div>
   );
@@ -16,7 +16,8 @@ function CommentList() {
 export default CommentList;
 
 const CommentContainer = styled.div`
-  border: 1px solid black;
+  border-top: 1px solid #7588d8;
+
   height: 50px;
   width: inherit;
 `;
