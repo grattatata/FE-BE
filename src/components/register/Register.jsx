@@ -1,12 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { postUser } from "../../redux/modules/signup";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 function Register() {
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -14,14 +11,15 @@ function Register() {
     watch,
     formState: { errors },
   } = useForm();
+
   const password = watch("password");
+
   const onSubmit = (data) => {
-    axios.post("http://222.111.114.132:4000/users/signup", data).then((response) => {
-      // console.log(response);
+    axios.post(process.env.REACT_APP_USER_REGIST, data).then((response) => {
       if (response.status === 201) {
         window.alert(response.data.msg);
         navigate("/login");
-      } else {
+      } else if (response.status === 409) {
         alert("중복된 아이디 입니다.");
       }
     });

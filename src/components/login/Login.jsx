@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import kakaoLogin from "../../assets/img/kakao_login_large_wide.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { decodeToken } from "react-jwt";
+
+axios.defaults.withCredentials = true;
 
 function Login() {
+  const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
   const navigate = useNavigate();
   const {
     register,
@@ -14,13 +18,28 @@ function Login() {
   } = useForm();
 
   const onSubmit = (data) => {
-    axios.post("http://222.111.114.132:4000/users/login", data).then((response) => {
-      console.log(response);
-      if (response.status === 200) {
-        alert(response.data.msg);
-        navigate("/");
-      }
-    });
+    try {
+      axios.post(process.env.REACT_APP_USER_LOGIN, data).then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          navigate("/");
+          const token = response.data.accessToken;
+          localStorage.setItem("token", token);
+          console.log(token);
+          const payload = decodeToken(token);
+          alert(`${payload.nickname} 님 환영합니다!`);
+        } else if (response.status === 409) {
+          alert(response.data.msg);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      alert("로그인 실패");
+    }
+  };
+
+  const handleKaKaoLogin = () => {
+    window.location.href = KAKAO_AUTH_URL;
   };
 
   return (
@@ -48,15 +67,9 @@ function Login() {
             <Button style={{ marginLeft: "20px" }}>회원가입</Button>
           </Link>
         </ButtonWrap>
-      </InputWrap>
-      <SocialKakao>
-        <img
-          src={kakaoLogin}
-          alt="kakaoLogin"
-          width="90%"
-          height="55px"
-          style={{ marginLeft: "20px" }}
-        />
+      </InputWrap>    
+      <SocialKakao onClick={handleKaKaoLogin}>
+        <img src={kakaoLogin} alt="kakaoLogin" width="90%" height="55px" style={{ marginLeft: "20px" }} />
       </SocialKakao>
     </LoginForm>
   );
