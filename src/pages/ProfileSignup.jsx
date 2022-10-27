@@ -1,11 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { REST_API_KEY, REDIRECT_URI } from "../kakaologindata/KaKaoLoginData";
-import styled from "styled-components";
-import { useCookies } from "react-cookie";
-import { instance } from "../utils/Instance";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ProfileSignup() {
   const navigate = useNavigate();
@@ -53,5 +48,3 @@ function ProfileSignup() {
 }
 
 export default ProfileSignup;
-
-//ppT_1y9TE-RKn61scoXx9isP2IXRCWVwEM-67aHBOLJcUFdFWy5gjpXUPfTD7TELdktMLAo9c-sAAAGEDQJV4w

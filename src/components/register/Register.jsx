@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 function Register() {
   const navigate = useNavigate();
   const {
@@ -15,7 +15,7 @@ function Register() {
   const password = watch("password");
 
   const onSubmit = (data) => {
-    axios.post("http://222.111.114.132:4000/users/signup", data).then((response) => {
+    axios.post(process.env.REACT_APP_USER_REGIST, data).then((response) => {
       if (response.status === 201) {
         window.alert(response.data.msg);
         navigate("/login");
