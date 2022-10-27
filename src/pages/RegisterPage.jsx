@@ -6,7 +6,7 @@ import Header from "../components/header/Header";
 function RegisterPage() {
   return (
     <Layout>
-      <Header />
+      <Header title={"회원가입 해주세요!"} />
       <Register />
     </Layout>
   );

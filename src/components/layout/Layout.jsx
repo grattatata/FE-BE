@@ -7,4 +7,7 @@ function Layout({ children }) {
 
 export default Layout;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin: 0;
+  padding: 0;
+`;

@@ -1,18 +1,25 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ title }) {
   return (
     <>
       <InfoWrap>
-        <div>My Blog</div>
+        <Link to="/" style={{ textDecoration: "none", color: "#14ebb5c5" }}>
+          <div>My Blog</div>
+        </Link>
         <LoginWrap>
-          <div>로그인</div>
-          <div style={{ marginLeft: "15px" }}>회원가입</div>
+          <Link to="/login" style={{ textDecoration: "none", color: "#14ebb5c5" }}>
+            <div>로그인</div>
+          </Link>
+          <Link to="/register" style={{ textDecoration: "none", color: "#14ebb5c5" }}>
+            <div style={{ marginLeft: "15px" }}>회원가입</div>
+          </Link>
         </LoginWrap>
       </InfoWrap>
       <Banner>
-        <Ment>우리들의 블로그</Ment>
+        <Ment>{title}</Ment>
       </Banner>
     </>
   );
