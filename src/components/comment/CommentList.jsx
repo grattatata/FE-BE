@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import Comment from "./Comment";
 import CommentInput from "./CommentInput";
 function CommentList() {
   return (
     <div>
       <CommentContainer>
         <CommentInput />
+        {/* <Comment /> */}
       </CommentContainer>
     </div>
   );
@@ -14,7 +16,8 @@ function CommentList() {
 export default CommentList;
 
 const CommentContainer = styled.div`
-  border: 1px solid black;
+  border-top: 1px solid #7588d8;
+
   height: 50px;
   width: inherit;
 `;

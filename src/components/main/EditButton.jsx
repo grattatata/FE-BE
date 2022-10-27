@@ -22,7 +22,7 @@ function EditButton({ post }) {
     alert("수정완료! 😁");
   };
 
-  const onChange = useCallback((e) => {
+  const onChangeHandler = useCallback((e) => {
     const { name, value } = e.target;
     setInput((prev) => ({ ...prev, [name]: value }));
   }, []);

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { __deletePosts, __getPosts } from "../../redux/modules/posts";
 import CommentList from "../comment/CommentList";
-import EditButton from "./EditButton";
+// import CommentList from "../comment/CommentList";
+// import EditButton from "./EditButton";
 
 function MainList() {
   const dispatch = useDispatch();
@@ -13,6 +14,12 @@ function MainList() {
   const onDelete = (postId) => {
     dispatch(__deletePosts(postId));
   };
+
+  // const a = (x) => {
+  //   return (() =>{
+  //     console.log(x)
+  //   })
+  // }
 
   useEffect(() => {
     dispatch(__getPosts());
@@ -49,10 +56,6 @@ export default MainList;
 const MainTopBox = styled.div`
   border-bottom: 1px solid #7588d8;
   width: 100%;
-`;
-
-const Contenttitle = styled.span`
-  margin: 10px;
 `;
 
 const MainFeedContainer = styled.div`

@@ -7,13 +7,6 @@
       "confirm": "1234"
     }
   ],
-  "feeds": [
-    {
-      "userKey": "dsfds",
-      "title": "제목",
-      "content": "내용"
-    }
-  ],
   "comments": [
     {},
     {
