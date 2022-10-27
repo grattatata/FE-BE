@@ -4,14 +4,12 @@ import { Link, redirect, useNavigate } from "react-router-dom";
 import kakaoLogin from "../../assets/img/kakao_login_large_wide.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { REST_API_KEY, REDIRECT_URI } from "../../kakaologindata/KaKaoLoginData";
 import { decodeToken } from "react-jwt";
 
 axios.defaults.withCredentials = true;
 
 function Login() {
-  // const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-  const KAKAO_AUTH_URL = "http://222.111.114.132:4000/auth/kakao";
+  const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
   const navigate = useNavigate();
   const {
     register,
@@ -21,7 +19,7 @@ function Login() {
 
   const onSubmit = (data) => {
     try {
-      axios.post("http://222.111.114.132:4000/users/login", data).then((response) => {
+      axios.post(process.env.REACT_APP_USER_LOGIN, data).then((response) => {
         console.log(response);
         if (response.status === 200) {
           navigate("/");
@@ -42,13 +40,6 @@ function Login() {
 
   const handleKaKaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
-    // axios.get("http://222.111.114.132:4000/auth/kakao").then((response) => {
-    //   console.log(response);
-    //   if (response.status === 200) {
-    //     console.log("로그인 성공!");
-    //   }
-    // });
-    redirect("/");
   };
 
   return (
